@@ -1,0 +1,17 @@
+[alias]
+  ada = add -A
+  co = checkout
+  cod = checkout develop
+  cob = checkout -b
+  cm = commit
+  cma = commit --amend
+  feto = fetch origin
+  mod = merge origin develop
+  l1 = log --oneline
+  puta = push --tags
+  pom = pull origin master
+  pod = pull origin develop
+  pussy = push origin develop
+  pushy = push origin master
+  st = status
+  stal = stash list
