@@ -1,17 +1,26 @@
+[url "https://"]
+  insteadOf = git://
+[core]
+  eol = lf
+  autocrlf = input
+  safecrlf = false
+  pager = less
 [alias]
   ada = add -A
   co = checkout
-  cod = checkout develop
   cob = checkout -b
+  cod = checkout develop
   cm = commit
   cma = commit --amend
   feto = fetch origin
-  mod = merge origin develop
+  mod = merge origin/develop
   l1 = log --oneline
   puta = push --tags
-  pom = pull origin master
   pod = pull origin develop
+  pom = pull origin master
   pussy = push origin develop
   pushy = push origin master
+  rmv = remote -v
   st = status
+  stu = status -uno
   stal = stash list
