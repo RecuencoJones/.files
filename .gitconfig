@@ -18,7 +18,7 @@
   puta = push --tags
   pod = pull origin develop
   pom = pull origin master
-	pub = "!f() { git push origin `git rev-parse --abbrev-ref HEAD`; }; f"
+  pub = "!f() { git push origin `git rev-parse --abbrev-ref HEAD`; }; f"
   pussy = push origin develop
   pushy = push origin master
   rmv = remote -v
