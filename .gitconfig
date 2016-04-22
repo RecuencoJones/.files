@@ -14,13 +14,15 @@
   cma = commit --amend
   feto = fetch origin
   mod = merge origin/develop
+	mob = "!f() { git merge origin/`git rev-parse --abbrev-ref HEAD`; }; f"
   l1 = log --oneline
   puta = push --tags
   pod = pull origin develop
   pom = pull origin master
-  pub = "!f() { git push origin `git rev-parse --abbrev-ref HEAD`; }; f"
+	pob = "!f() { git pull origin `git rev-parse --abbrev-ref HEAD`; }; f"
   pussy = push origin develop
   pushy = push origin master
+  pub = "!f() { git push origin `git rev-parse --abbrev-ref HEAD`; }; f"
   rmv = remote -v
   taga = "!f() { git tag -a $1 -m '$1'; }; f"
   tal = tag -l
