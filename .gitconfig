@@ -14,12 +14,12 @@
   cma = commit --amend
   feto = fetch origin
   mod = merge origin/develop
-	mob = "!f() { git merge origin/`git rev-parse --abbrev-ref HEAD`; }; f"
+  mob = "!f() { git merge origin/`git rev-parse --abbrev-ref HEAD`; }; f"
   l1 = log --oneline
   puta = push --tags
   pod = pull origin develop
   pom = pull origin master
-	pob = "!f() { git pull origin `git rev-parse --abbrev-ref HEAD`; }; f"
+  pob = "!f() { git pull origin `git rev-parse --abbrev-ref HEAD`; }; f"
   pussy = push origin develop
   pushy = push origin master
   pub = "!f() { git push origin `git rev-parse --abbrev-ref HEAD`; }; f"
@@ -29,3 +29,11 @@
   st = status
   stu = status -uno
   stal = stash list
+  
+  pr = "!f() {\
+    remote=`git rmv | grep origin | grep push | awk '{print $2}'`;\
+    project=`echo $remote | cut -d/ -f6`;\
+    repo=`echo $remote | cut -d/ -f7 | cut -d. -f1`;\
+    branch=`git rev-parse --abbrev-ref HEAD`;\
+    start chrome https://host:port/path/$project/$repo?branch=$branch;\
+ }; f"
