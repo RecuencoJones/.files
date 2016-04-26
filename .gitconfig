@@ -36,4 +36,4 @@
     repo=`echo $remote | cut -d/ -f7 | cut -d. -f1`;\
     branch=`git rev-parse --abbrev-ref HEAD`;\
     start chrome https://host:port/path/$project/$repo?branch=$branch;\
- }; f"
+  }; f"
