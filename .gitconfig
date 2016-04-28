@@ -28,7 +28,10 @@
   tal = tag -l
   st = status
   stu = status -uno
+  sta = stash
+  stam = "!f() { git stash save '$@' }; f"
   stal = stash list
+  stap = stash apply
   
   pr = "!f() {\
     remote=`git rmv | grep origin | grep push | awk '{print $2}'`;\
