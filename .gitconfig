@@ -38,5 +38,14 @@
     project=`echo $remote | cut -d/ -f6`;\
     repo=`echo $remote | cut -d/ -f7 | cut -d. -f1`;\
     branch=`git rev-parse --abbrev-ref HEAD`;\
-    start chrome https://host:port/path/$project/$repo?branch=$branch;\
+    
+    case '$1' in\
+    github | gh) start chrome https://github.com/$project/$repo/compare/$branch...develop?expand=1;;\
+    *) echo https://host:port/path/$project/$repo?branch=$branch;;\
+    esac;\
   }; f"
+  
+  # github
+  # https://github.com/{project}/{repo}/compare/{branch}...develop?expand=1
+  #
+  #
