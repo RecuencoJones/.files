@@ -38,12 +38,12 @@
     project=`echo $remote | cut -d/ -f6`;\
     repo=`echo $remote | cut -d/ -f7 | cut -d. -f1`;\
     branch=`git rev-parse --abbrev-ref HEAD`;\
-		browser=chrome;\
-		case $1 in\
-			github | gh) start $browser https://github.com/$project/$repo/compare/$branch...develop?expand=1;;\
-			gitlab | gl) start $browser https://gitlab.com/$project/$repo/merge_requests/new?merge_request[source_branch]=$branch;;\
-			bitbucket | bb) start $browser https://bitbucket.org/$project/$repo/pull-requests/new;;\
-			echo) echo https://host:port/path/$project/$repo?branch=$branch;;\
-			*) start $browser https://github.com/$project/$repo/compare/$branch...develop?expand=1;;\
-		esac;\
+    browser=chrome;\
+    case $1 in\
+      github | gh) start $browser https://github.com/$project/$repo/compare/$branch...develop?expand=1;;\
+      gitlab | gl) start $browser https://gitlab.com/$project/$repo/merge_requests/new?merge_request[source_branch]=$branch;;\
+      bitbucket | bb) start $browser https://bitbucket.org/$project/$repo/pull-requests/new;;\
+      echo) echo https://host:port/path/$project/$repo?branch=$branch;;\
+      *) start $browser https://github.com/$project/$repo/compare/$branch...develop?expand=1;;\
+    esac;\
   }; f"
