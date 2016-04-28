@@ -36,8 +36,8 @@
   
   pr = "!f() {\
     remote=`git rmv | grep origin | grep push | awk '{print $2}'`;\
-    project=`echo $remote | cut -d/ -f6`;\
-    repo=`echo $remote | cut -d/ -f7 | cut -d. -f1`;\
+    project=`echo $remote | awk -F/ '{ print $(NF-1) }'`;\
+    repo=`echo $remote | awk -F/ '{ print $NF }' | cut -d. -f1`;\
     branch=`git rev-parse --abbrev-ref HEAD`;\
     browser=chrome;\
     case $1 in\
