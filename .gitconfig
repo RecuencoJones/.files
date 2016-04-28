@@ -20,11 +20,12 @@
   pod = pull origin develop
   pom = pull origin master
   pob = "!f() { git pull origin `git rev-parse --abbrev-ref HEAD`; }; f"
+  pub = "!f() { git push origin `git rev-parse --abbrev-ref HEAD`; }; f"
+  pur = "!f() { git pub; git pr; }; f"
   pussy = push origin develop
   pushy = push origin master
-  pub = "!f() { git push origin `git rev-parse --abbrev-ref HEAD`; }; f"
   rmv = remote -v
-  taga = "!f() { git tag -a $1 -m '$1'; }; f"
+  taga = "!f() { git tag -a $1 -m '$1' $2; }; f"
   tal = tag -l
   st = status
   stu = status -uno
