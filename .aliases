@@ -1,0 +1,10 @@
+# mkcd
+# create directory (any depth) and cd into it
+function mkcd {
+  mkdir -p $1
+  cd $1
+}
+
+# got
+# yes, I misstype it a lot
+alias got=git
