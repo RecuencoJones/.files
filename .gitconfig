@@ -5,10 +5,12 @@
   autocrlf = input
   safecrlf = false
   pager = less
+  editor = vim
 [alias]
   ada = add -A
   co = checkout
   cob = checkout -b
+  cobd = checkout -b develop
   cod = checkout develop
   cm = commit
   cma = commit --amend
@@ -22,7 +24,8 @@
   pom = pull origin master
   pob = "!f() { git pull origin `git rev-parse --abbrev-ref HEAD`; }; f"
   pu = push origin
-  pub = "!f() { git push origin `git rev-parse --abbrev-ref HEAD`; }; f"
+  pub = "!f() { git push origin `git rev-parse --abbrev-ref HEAD` $@; }; f"
+  puf = "!f() { git push origin `git rev-parse --abbrev-ref HEAD` --force; }; f"
   pur = "!f() { git pub; git pr; }; f"
   pussy = push origin develop
   pushy = push origin master
