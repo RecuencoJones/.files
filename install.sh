@@ -46,7 +46,7 @@ function pickDownloadStrategy() {
 
 # @param {string} $1 - file name
 function download() {
-  curl -sL -o ~/$1 https://raw.githubusercontent.com/RecuencoJones/.files/master/$1
+  pickDownloadStrategy ~/$1 https://raw.githubusercontent.com/RecuencoJones/.files/master/$1
 
   if [ "$?" -eq "0" ]
   then
@@ -54,7 +54,6 @@ function download() {
   else
     echo 'Unexpected error :('
   fi
-
 }
 
 function installProfile() {
