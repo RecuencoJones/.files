@@ -1,0 +1,13 @@
+# aliases
+alias r='source ~/.bash_profile'
+alias ll='ls -la'
+alias npmv='f() { npm show $1 version;  unset -f f; }; f'
+alias v='node -p "require(\"./package.json\").version"'
+alias got='git'
+alias k='kubectl'
+alias kubectx='kubectl config current-context'
+alias kubecdev='kubectl config use-context dev-hzo'
+alias kubecpro='kubectl config use-context prd-hzo'
+alias kubeagp='kubectl -n adidas-github-portal'
+alias kubenpm='kubectl -n bwrnpm'
+alias chromenosecurity='open -n -a Google\ Chrome --args --disable-web-security --user-data-dir=/tmp/chrome'
