@@ -1,6 +1,8 @@
 #!/bin/bash -l
 ## Shell with login is required to manage .npmrcs located in user home
 
+source ./__npmrc_help.sh
+
 version=0.1.0
 editor=${EDITOR:-vim}
 npmrc_dir=${NPMRC_DIR:-"~"}
@@ -43,7 +45,7 @@ function use() {
 # @param $1 profile name
 function edit() {
     if [ -z "$1" ] ; then
-        editHelp
+        __edit_help
     fi
 
     checkProfile $1
@@ -57,7 +59,7 @@ function edit() {
 # @param $2? -y flag skip confirmation
 function delete() {
     if [ -z "$1" ] ; then
-        deleteHelp
+        __delete_help
     fi
 
     checkProfile $1
@@ -107,68 +109,11 @@ function main() {
         -v) version;;
         --version) version;;
         version) version;;
-        help) help $0;;
-        --help) help $0;;
-        -h) help $0;;
-        *) help $0;;
+        help) __help $0;;
+        --help) __help $0;;
+        -h) __help $0;;
+        *) __help $0;;
     esac
-}
-
-function useHelp() {
-    echo "
-    Usage: use <profile>
-
-    Switch to another profile.
-"
-}
-
-function editHelp() {
-    echo "
-    Usage: edit <profile>
-
-    Edit or create a profile.
-    Opens the default editor ($editor) or the one specified through NPMRC_EDITOR env variable.
-"
-}
-
-function deleteHelp() {
-    echo "
-    Usage: delete <profile> [options]
-
-    Delete a profile.
-
-    Options:
-        -y              Skip confirmation
-"
-}
-
-function listHelp() {
-    echo "
-    Usage: list [options]
-
-    List the available profiles.
-
-    Options:
-        -l              List as multiline
-"
-}
-
-function help() {
-    echo "
-    Usage: npmrc <command> [options]
-
-    Commands:
-        use <profile>                     Switch profile
-        ed,edit <profile>                 Create or edit a profile
-        del,delete <profile> [options]    Delete a profile
-        ls,list [options]                 List available profiles
-        version                           Display version
-        help                              Print this message
-
-    Options:
-        -v,--version                      Display version
-        -h,--help                         Print this message
-"
 }
 
 main "$@"
