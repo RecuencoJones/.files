@@ -1,0 +1,174 @@
+#!/bin/bash -l
+## Shell with login is required to manage .npmrcs located in user home
+
+version=0.1.0
+editor=${EDITOR:-vim}
+npmrc_dir=${NPMRC_DIR:-"~"}
+npmrc_filename=.npmrc
+
+# list available npmrc profiles
+function listProfiles() {
+    local home_path=`echo ~`
+    ls $home_path/$npmrc_filename.* | sed 's,'"$home_path/$npmrc_filename."',,'
+}
+
+# check if profile is defined
+# @param $1 profile
+function checkProfile() {
+    if [ -z "$1" ] ; then
+        echo "Error > Missing profile name!"
+        echo "Available profiles:" `listProfiles`
+        exit 1
+    fi
+}
+
+# check if profile is in existing profiles
+# @param $1 profile name
+function checkExistingProfile() {
+    listProfiles
+}
+
+# switch to other profile
+# @param $1 profile name
+function use() {
+    checkProfile $1
+
+    bash -lc "cp ~/$npmrc_filename.$1 ~/$npmrc_filename"
+
+    echo "Now using profile: $1"
+    echo Registry: $(npm get registry)
+}
+
+# edit or create a profile
+# @param $1 profile name
+function edit() {
+    if [ -z "$1" ] ; then
+        editHelp
+    fi
+
+    checkProfile $1
+
+    echo "Editing profile: $1"
+    bash -lc "$editor ~/$npmrc_filename.$1"
+}
+
+# delete a profile
+# @param $1 profile name
+# @param $2? -y flag skip confirmation
+function delete() {
+    if [ -z "$1" ] ; then
+        deleteHelp
+    fi
+
+    checkProfile $1
+
+    echo "Removing profile: $1"
+
+    if [ "$2" == "-y" ] ; then
+        REPLY="y"
+    else
+        read -p "Are you sure? (y/N) " -n 1 -r
+    fi
+
+    if [[ $REPLY =~ ^[Yy]$ ]] ; then
+        echo
+        bash -lc "rm -f ~/$npmrc_filename.$1"
+    else
+        echo
+    fi
+}
+
+# list all profiles
+# @param $1? -l flag list as multiline
+function list() {
+    local profiles=`listProfiles`
+
+    if [ "$1" == "-l" ] ; then
+        echo "$profiles"
+    else
+        echo $profiles
+    fi
+}
+
+function version() {
+    echo $version
+}
+
+function main() {
+    case "$1" in
+        use) use $2;;
+        edit) edit $2;;
+        ed) edit $2;;
+        delete) delete $2 $3;;
+        del) delete $2 $3;;
+        
+        list) list $2;;
+        ls) list $2;;
+        -v) version;;
+        --version) version;;
+        version) version;;
+        help) help $0;;
+        --help) help $0;;
+        -h) help $0;;
+        *) help $0;;
+    esac
+}
+
+function useHelp() {
+    echo "
+    Usage: use <profile>
+
+    Switch to another profile.
+"
+}
+
+function editHelp() {
+    echo "
+    Usage: edit <profile>
+
+    Edit or create a profile.
+    Opens the default editor ($editor) or the one specified through NPMRC_EDITOR env variable.
+"
+}
+
+function deleteHelp() {
+    echo "
+    Usage: delete <profile> [options]
+
+    Delete a profile.
+
+    Options:
+        -y              Skip confirmation
+"
+}
+
+function listHelp() {
+    echo "
+    Usage: list [options]
+
+    List the available profiles.
+
+    Options:
+        -l              List as multiline
+"
+}
+
+function help() {
+    echo "
+    Usage: npmrc <command> [options]
+
+    Commands:
+        use <profile>                     Switch profile
+        ed,edit <profile>                 Create or edit a profile
+        del,delete <profile> [options]    Delete a profile
+        ls,list [options]                 List available profiles
+        version                           Display version
+        help                              Print this message
+
+    Options:
+        -v,--version                      Display version
+        -h,--help                         Print this message
+"
+}
+
+main "$@"
