@@ -36,3 +36,10 @@ function __kubectl_complete() {
 __kubectl_complete k
 
 unset -f __complete_kubectl
+
+# PS1
+function parse_git_branch {
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+
+export PS1="$(echo -ne "\x0\x01\xF4\xBB" | iconv -f UTF-32BE -t UTF-8) \[$(tput bold)\]\[\033[38;5;71m\][\T]\[$(tput sgr0)\] \[$(tput bold)\]\u\[$(tput sgr0)\]@\h:\[$(tput setaf 5)\]\W\[$(tput sgr0)\]\[$(tput bold)\]\[\033[38;5;71m\]\$(parse_git_branch)\[$(tput sgr0)\] \[$(tput bold)\]\\$\[$(tput sgr0)\] "
