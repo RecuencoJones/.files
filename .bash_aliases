@@ -2,10 +2,14 @@
 alias r='source ~/.bash_profile'
 alias ll='ls -la'
 alias chromenosecurity='open -n -a Google\ Chrome --args --disable-web-security --user-data-dir=/tmp/chrome'
-alias got='git'
 alias chmox='chmod +x'
 alias f='fuck'
 alias fu='fuck'
+
+# git
+alias got='git'
+
+__git_complete got __git_main
 
 # npm
 alias npmi='npm install'
