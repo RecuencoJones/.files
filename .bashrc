@@ -1,4 +1,4 @@
-LC_ALL=C
+export LC_ALL=en_US.UTF-8
 
 # Bash completion
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
@@ -18,7 +18,6 @@ export PATH=$PATH:$HOME/go/bin
 
 # Kubeconfig
 export KUBECONFIG=$HOME/.kube/config
-
 
 # VSCode
 export PATH=$PATH:"/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
