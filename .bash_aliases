@@ -1,5 +1,6 @@
 # aliases
 alias r='source ~/.bash_profile'
+alias l='ls -1'
 alias ll='ls -la'
 alias chromenosecurity='open -n -a Google\ Chrome --args --disable-web-security --user-data-dir=/tmp/chrome'
 alias chmox='chmod +x'
@@ -12,6 +13,8 @@ alias got='git'
 __git_complete got __git_main
 
 # npm
+alias npr='npm run'
+alias npmr='npm run'
 alias npmi='npm install'
 alias npms='npm start'
 alias npml='npm run lint'
@@ -20,12 +23,18 @@ alias npmt='npm test'
 alias npmv='f() { npm show $1 version;  unset -f f; }; f'
 alias v='node -p "require(\"./package.json\").version"'
 
+# yarn ... sigh
+alias yarn='npx yarn'
+
+# kubectl
 alias k='kubectl'
 alias kubectx='kubectl config current-context'
 alias kubecdev='kubectl config use-context dev-hzo'
 alias kubecstg='kubectl config use-context stg-hzo'
 alias kubecpro='kubectl config use-context prd-hzo'
 alias kubelocal='kubectl --kubeconfig=$HOME/.kube/config-local'
+alias kubesail='kubectl --kubeconfig=$HOME/.kube/config-kubesail'
+alias kubelogin="sed -i '' '/refresh/d' $HOME/.kube/config; kubectl cluster-info"
 
 function __complete_kubectl() {
   #complete -o default -o nospace -F __start_kubectl $1
@@ -35,6 +44,7 @@ function __complete_kubectl() {
 function __make_k8s_alias {
   # $1 namespace
   # $2 abbreviation
+
   alias kube${2}="kubectl -n ${1}"
   alias k${2}="kubectl -n ${1}"
   alias k${2}l="kubectl -n ${1} logs"
@@ -44,6 +54,8 @@ function __make_k8s_alias {
   alias k${2}depo="kubectl -n ${1} describe pod"
   alias k${2}exec="kubectl -n ${1} exec -it"
   alias k${2}pf="kubectl -n ${1} port-forward"
+  alias k${2}rs="kubectl -n ${1} rollout restart"
+  alias k${2}:img="kubectl -n ${1} get deployments,statefulset -o jsonpath=\"{range .items[*]}{ .spec.template.spec.containers[0].image }{ '\n' }{end}\""
 
   __complete_kubectl kube${2}
   __complete_kubectl k${2}
@@ -54,6 +66,7 @@ function __make_k8s_alias {
   __complete_kubectl k${2}depo
   __complete_kubectl k${2}exec
   __complete_kubectl k${2}pf
+  __complete_kubectl k${2}rs
 }
 
 __make_k8s_alias adidas-github-portal agp
@@ -62,3 +75,6 @@ __make_k8s_alias lean-delivery lnd
 
 __complete_kubectl k
 __complete_kubectl kubelocal
+
+# terraform
+alias tf='terraform'
